@@ -105,17 +105,17 @@
 
 -- Drop existing tables, so you'll start fresh each time this script is run.
 -- TODO!
-DROP TABLE IF EXISTS movies
-DROP TABLE IF EXISTS studios
-DROP TABLE IF EXISTS actors
-DROP TABLE IF EXISTS character_lists
+DROP TABLE IF EXISTS movies;
+DROP TABLE IF EXISTS studios;
+DROP TABLE IF EXISTS actors;
+DROP TABLE IF EXISTS character_lists;
 
 -- Create new tables, according to your domain model
 -- TODO!
 CREATE TABLE movies(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     title TEXT,
-    rating INTEGER,
+    rating TEXT,
     studio_id INTEGER,
     year INTEGER 
 );
@@ -129,7 +129,7 @@ CREATE TABLE actors(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT,
     movie_id INTEGER,
-    character TEXT
+    character_id INTEGER
 );
 
 CREATE TABLE character_lists(
@@ -141,6 +141,23 @@ CREATE TABLE character_lists(
 -- Insert data into your database that reflects the sample data shown above
 -- Use hard-coded foreign key IDs when necessary
 -- TODO!
+INSERT INTO studios(
+    name
+)
+VALUES (
+    "Warner Bros."
+);
+
+INSERT INTO movies(
+    title,
+    rating,
+    studio_id,
+    year
+)
+VALUES (
+    "Batman Begins", "PG-13", 1, 2005),
+    ("The Dark Knight", "PG-13", 1, 2008),
+    ("The Dark Knight Rises", "PG-13", 1, 2012);
 
 -- Prints a header for the movies output
 .print "Movies"
@@ -149,6 +166,8 @@ CREATE TABLE character_lists(
 
 -- The SQL statement for the movies output
 -- TODO!
+SELECT movies.title, movies.year, movies.rating, studios.name FROM movies
+INNER JOIN studios ON movies.studio_id = studios.id; 
 
 -- Prints a header for the cast output
 .print ""
