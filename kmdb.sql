@@ -116,7 +116,7 @@ CREATE TABLE movies(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     title TEXT,
     rating INTEGER,
-    studio TEXT,
+    studio_id INTEGER,
     year INTEGER 
 );
 
