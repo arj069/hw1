@@ -134,6 +134,7 @@ CREATE TABLE actors(
 
 CREATE TABLE character_lists(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT,
     movie_id INTEGER,
     actor_id INTEGER
 );
@@ -158,6 +159,28 @@ VALUES (
     "Batman Begins", "PG-13", 1, 2005),
     ("The Dark Knight", "PG-13", 1, 2008),
     ("The Dark Knight Rises", "PG-13", 1, 2012);
+
+INSERT INTO actors(
+    name, movie_id, character_id)
+VALUES ("Christian Bale",1,1),
+("Michael Caine",1,2),
+("Liam Neeson",1,3),
+("Katie Holmes",1,4),
+("Gary Oldman",1,5),
+("Christian Bale",2,1),
+("Heath Ledger",2,6),
+("Aaron Eckhart",2,7),
+("Michael Caine",2,2),
+("Maggie Gyllenhaal",2,4),
+("Christian Bale",3,1),
+("Gary Oldman",3,5),
+("Tom Hardy",3,8),
+("Joseph Gordon-Levitt",3,9),
+("Anne Hathaway",3,10)
+;
+
+INSERT INTO character_lists(name,movie_id,actor_id)
+VALUES ("Bruce Wayne","Alfred","Ra's Al Ghul","Rachel Dawes","Commissioner Gordon","Joker","Harvey Dent","Bane","John Blake","Selina Kyle")
 
 -- Prints a header for the movies output
 .print "Movies"
