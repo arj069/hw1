@@ -122,19 +122,19 @@ CREATE TABLE movies(
 
 CREATE TABLE studios(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name TEXT
+    full_name_s TEXT
 );
 
 CREATE TABLE actors(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name TEXT,
+    full_name_a TEXT,
     movie_id INTEGER,
     character_id INTEGER
 );
 
 CREATE TABLE character_lists(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name TEXT,
+    full_name_c TEXT,
     movie_id INTEGER,
     actor_id INTEGER
 );
@@ -143,7 +143,7 @@ CREATE TABLE character_lists(
 -- Use hard-coded foreign key IDs when necessary
 -- TODO!
 INSERT INTO studios(
-    name
+    full_name_s
 )
 VALUES (
     "Warner Bros."
@@ -155,13 +155,11 @@ INSERT INTO movies(
     studio_id,
     year
 )
-VALUES (
-    "Batman Begins", "PG-13", 1, 2005),
+VALUES ("Batman Begins", "PG-13", 1, 2005),
     ("The Dark Knight", "PG-13", 1, 2008),
     ("The Dark Knight Rises", "PG-13", 1, 2012);
 
-INSERT INTO actors(
-    name, movie_id, character_id)
+INSERT INTO actors(full_name_a, movie_id, character_id)
 VALUES ("Christian Bale",1,1),
 ("Michael Caine",1,2),
 ("Liam Neeson",1,3),
@@ -176,11 +174,24 @@ VALUES ("Christian Bale",1,1),
 ("Gary Oldman",3,5),
 ("Tom Hardy",3,8),
 ("Joseph Gordon-Levitt",3,9),
-("Anne Hathaway",3,10)
-;
+("Anne Hathaway",3,10);
 
-INSERT INTO character_lists(name,movie_id,actor_id)
-VALUES ("Bruce Wayne","Alfred","Ra's Al Ghul","Rachel Dawes","Commissioner Gordon","Joker","Harvey Dent","Bane","John Blake","Selina Kyle")
+INSERT INTO character_lists(full_name_c,movie_id,actor_id)
+VALUES ("Bruce Wayne",1,1),
+("Alfred",1,2),
+("Ra's Al Ghul",1,3),
+("Rachel Dawes",1,4),
+("Commissioner Gordon",1,5),
+("Bruce Wayne",2,6),
+("Joker",2,7),
+("Harvey Dent",2,8),
+("Alfred",2,9),
+("Rachel Dawes",2,10),
+("Bruce Wayne",3,11),
+("Commissioner Gordon",3,12),
+("Bane",3,13),
+("John Blake",3,14),
+("Selina Kyle",3,15);
 
 -- Prints a header for the movies output
 .print "Movies"
@@ -189,7 +200,7 @@ VALUES ("Bruce Wayne","Alfred","Ra's Al Ghul","Rachel Dawes","Commissioner Gordo
 
 -- The SQL statement for the movies output
 -- TODO!
-SELECT movies.title, movies.year, movies.rating, studios.name FROM movies
+SELECT movies.title, movies.year, movies.rating, studios.full_name_s FROM movies
 INNER JOIN studios ON movies.studio_id = studios.id; 
 
 -- Prints a header for the cast output
@@ -201,3 +212,6 @@ INNER JOIN studios ON movies.studio_id = studios.id;
 
 -- The SQL statement for the cast output
 -- TODO!
+SELECT movies.title, actors.full_name_a, character_lists.full_name_c FROM movies
+INNER JOIN character_lists ON character_lists.movie_id = movies.id
+INNER JOIN actors ON character_lists.actor_id = actors.id;
